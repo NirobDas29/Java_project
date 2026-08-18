@@ -47,7 +47,7 @@ public class Payment implements Serializable {
     }
 
     public boolean processPayment() {
-        System.out.println("\nProcessing Payment of Rs." + amount + " via " + method + " ...");
+        System.out.println("\nProcessing Payment of BDT" + amount + " via " + method + " ...");
         Thread animationThread = new Thread(new ProgressAnimation());
         try {
             animationThread.start();
