@@ -9,7 +9,7 @@ public class Movie implements Serializable {
 
     private static final String[] ROWS = {"A", "B", "C", "D"};
     private static final int SEATS_PER_ROW = 5;
-    public static final int TOTAL_SEATS = ROWS.length * SEATS_PER_ROW; // 20 Seats
+    public static final int TOTAL_SEATS = ROWS.length * SEATS_PER_ROW; 
     private static final String[] PREMIUM_ROWS = {"C", "D"};
 
     private int movieId;
