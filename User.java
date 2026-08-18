@@ -13,7 +13,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 5L;
 
     private String userName;
-    private String password; // stores the SHA-256 hash, never plain text
+    private String password; 
     private String email;
     private String phoneNumber;
     private boolean isAdmin;
@@ -39,8 +39,6 @@ public class User implements Serializable {
     public static boolean isValidGmail(String email) {
         return email != null && email.toLowerCase().endsWith("@gmail.com") && email.length() > 10;
     }
-
-    // ----- Password hashing (SHA-256) -----
     public static String hashPassword(String plainPassword) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -52,8 +50,6 @@ public class User implements Serializable {
             throw new RuntimeException("Password hashing failed", e);
         }
     }
-
-    // ----- Persistence (SQLite via Db) -----
     public static List<User> loadUsers() {
         Db.initSchema();
         seedDefaultUsersIfEmpty();
@@ -99,11 +95,7 @@ public class User implements Serializable {
         }
     }
 
-    // saveUsers() is no longer needed for bulk saving since each write goes
-    // straight to the database (see registerUser / updateUserProfile below),
-    // but kept as a no-op-safe helper in case older calling code still refers to it.
     public static void saveUsers(List<User> users) {
-        // No-op: each individual create/update already persists immediately.
     }
 
     public static User authenticate(String username, String password) {
