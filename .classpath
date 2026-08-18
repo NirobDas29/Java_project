@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-  <classpathentry kind="src" path=""/>
-  <classpathentry kind="lib" path="sqlite-jdbc.jar"/>
-  <classpathentry kind="lib" path="slf4j-api.jar"/>
-  <classpathentry kind="lib" path="slf4j-simple.jar"/>
-  <classpathentry kind="output" path="bin"/>
-</classpath>
