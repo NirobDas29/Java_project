@@ -7,13 +7,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-
-/*
- * BookingService.java - All persistence now goes through SQLite (cinema.db)
- * via Db.get(). The only remaining plain-text file in the whole app is
- * booking_history.txt - an append-only human-readable log of every booking
- * action, kept on purpose as a simple text trail alongside the database.
- */
 public class BookingService {
     private static final String HISTORY_FILE = "booking_history.txt";
     private static final String RECEIPT_DIR = "receipts";
@@ -22,8 +15,6 @@ public class BookingService {
         Db.initSchema();
         seedDefaultMoviesIfEmpty();
     }
-
-    // ================= MOVIES =================
     private void seedDefaultMoviesIfEmpty() {
         try (Statement st = Db.get().createStatement();
              ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM movies")) {
@@ -123,8 +114,6 @@ public class BookingService {
         }
         return list;
     }
-
-    // ================= SEARCH / FILTER =================
     public List<Movie> searchMovies(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) return getMovieList();
         List<Movie> result = new ArrayList<Movie>();
@@ -162,8 +151,6 @@ public class BookingService {
         }
         return result;
     }
-
-    // ================= BOOKINGS =================
     private Booking mapBooking(ResultSet rs) throws SQLException {
         return new Booking(
                 rs.getInt("booking_id"), rs.getInt("group_id"), rs.getString("user_name"),
@@ -319,15 +306,11 @@ public class BookingService {
         }
         return count;
     }
-
-    // ================= REFUND POLICY =================
     public double calculateRefundAmount(double originalAmount, double hoursBeforeShow) {
         if (hoursBeforeShow >= 24) return originalAmount;
         if (hoursBeforeShow >= 6) return originalAmount * 0.5;
         return 0.0;
     }
-
-    // ================= HISTORY (the one plain text file) =================
     private void appendToHistory(Booking b) {
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(HISTORY_FILE, true)))) {
             pw.println(b.toFileFormat());
@@ -335,8 +318,6 @@ public class BookingService {
             e.printStackTrace();
         }
     }
-
-    // ================= PAYMENTS =================
     public void savePaymentRecord(Payment payment) {
         String sql = "INSERT INTO payments (payment_id, group_id, user_name, movie_name, amount, seat_count, " +
                 "seat_list, method, mobile_number, transaction_id, payment_date, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -402,8 +383,6 @@ public class BookingService {
             return null;
         }
     }
-
-    // ================= REVIEWS & RATINGS =================
     public Review addReview(String movieName, String userName, int rating, String comment) {
         String sql = "INSERT INTO reviews (review_id, movie_name, user_name, rating, comment, review_date) " +
                 "VALUES ((SELECT COALESCE(MAX(review_id), 0) + 1 FROM reviews), ?, ?, ?, ?, ?)";
@@ -453,8 +432,6 @@ public class BookingService {
         }
         return 0.0;
     }
-
-    // ================= WAITLIST =================
     public WaitlistEntry addToWaitlist(String userName, String movieName, String hallName,
                                         String showTime, String date, int seatsWanted) {
         String sql = "INSERT INTO waitlist (waitlist_id, user_name, movie_name, hall_name, show_time, show_date, " +
@@ -529,8 +506,6 @@ public class BookingService {
             throw new RuntimeException("Failed to update waitlist", e);
         }
     }
-
-    // ================= ANALYTICS (ADMIN DASHBOARD) =================
     public double getTotalRevenue() {
         try (Statement st = Db.get().createStatement();
              ResultSet rs = st.executeQuery("SELECT COALESCE(SUM(amount),0) FROM payments WHERE status='Success'")) {
