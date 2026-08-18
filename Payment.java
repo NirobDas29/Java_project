@@ -1,27 +1,20 @@
 import java.io.Serializable;
 import java.util.Random;
-
-/*
- * Payment.java - Simulates payment processing (bKash / Nagad / Cash on
- * Counter) using a background thread that prints progress dots, and
- * doubles as the saved payment record for a whole multi-seat order once
- * processing finishes.
- */
 public class Payment implements Serializable {
     private static final long serialVersionUID = 2L;
 
     private int paymentId;
-    private int groupId;          // order this payment covers
+    private int groupId;          
     private String userName;
     private String movieName;
-    private double amount;        // total amount for the whole order
+    private double amount;        
     private int seatCount;
-    private String seatList;      // comma separated seat labels, e.g. "A1(R), C3(P)"
-    private String method;        // "bKash", "Nagad" or "Cash on Counter"
-    private String mobileNumber;  // for bKash / Nagad ("-" for cash)
+    private String seatList;      
+    private String method;        
+    private String mobileNumber;  
     private String transactionId;
     private String paymentDate;
-    private String status;        // "Pending" / "Success" / "Failed"
+    private String status;        
 
     public Payment(int groupId, String userName, String movieName, double amount, int seatCount,
                     String seatList, String method, String mobileNumber, String paymentDate) {
@@ -45,7 +38,7 @@ public class Payment implements Serializable {
                 for (int i = 0; i < 4; i++) {
                     dots = dots + ".";
                     System.out.println(dots);
-                    Thread.sleep(400); // simulate processing delay
+                    Thread.sleep(400); 
                 }
             } catch (InterruptedException e) {
                 System.out.println("Payment animation interrupted: " + e.getMessage());
@@ -82,8 +75,6 @@ public class Payment implements Serializable {
         return paymentId + " | " + groupId + " | " + userName + " | " + movieName + " | " +
                 amount + " | " + seatCount + " seat(s) | " + method + " | " + status + " | " + paymentDate;
     }
-
-    // ----- Getters and Setters -----
     public int getPaymentId() { return paymentId; }
     public void setPaymentId(int paymentId) { this.paymentId = paymentId; }
     public int getGroupId() { return groupId; }
