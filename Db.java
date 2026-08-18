@@ -2,15 +2,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-/*
- * Db.java - Central SQLite connection point and schema setup.
- * All persistence (movies, bookings, payments, users, reviews, waitlist)
- * lives in one file: cinema.db, created automatically on first run.
- *
- * The only thing that stays as a plain text file, on request, is the
- * running booking_history.txt append-only log (see BookingService).
- */
 public class Db {
     private static final String DB_URL = "jdbc:sqlite:cinema.db";
     private static Connection connection;
@@ -45,7 +36,7 @@ public class Db {
                 "image_path TEXT," +
                 "blockbuster INTEGER NOT NULL DEFAULT 0," +
                 "category TEXT NOT NULL," +
-                "show_times TEXT NOT NULL" + // comma-separated
+                "show_times TEXT NOT NULL" + 
             ")",
 
             "CREATE TABLE IF NOT EXISTS users (" +
