@@ -1,23 +1,16 @@
 import java.io.Serializable;
-
-/*
- * Booking.java - Represents a single seat within a booking order.
- * Multiple Booking records that share the same groupId were purchased
- * together in one multi-seat order.
- */
 public class Booking implements Serializable {
     private static final long serialVersionUID = 2L;
-
     private int bookingId;
-    private int groupId;       // order id - shared by every seat bought together
+    private int groupId;      
     private String userName;
     private String movieName;
     private String hallName;
     private String seatNumber;
-    private String seatType;   // "Regular" or "Premium"
+    private String seatType;   
     private String showTime;
     private double amount;
-    private String status;     // "Confirmed" or "Cancelled"
+    private String status;     
     private String bookingDate;
 
     public Booking(int bookingId, int groupId, String userName, String movieName, String hallName,
@@ -35,8 +28,6 @@ public class Booking implements Serializable {
         this.status = status;
         this.bookingDate = bookingDate;
     }
-
-    // ----- Getters and Setters -----
     public int getBookingId() { return bookingId; }
     public int getGroupId() { return groupId; }
     public String getUserName() { return userName; }
@@ -49,8 +40,6 @@ public class Booking implements Serializable {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public String getBookingDate() { return bookingDate; }
-
-    // Print a formatted movie ticket to the console
     public void printTicket() {
         System.out.println("==========================");
         System.out.println("        Movie Ticket");
@@ -67,7 +56,6 @@ public class Booking implements Serializable {
         System.out.println("==========================");
     }
 
-    // Convert booking details into a single line for file storage
     public String toFileFormat() {
         return bookingId + " | " + groupId + " | " + movieName + " | " + seatNumber + " (" + seatType + ")"
                 + " | " + amount + " | " + status + " | " + bookingDate + " " + showTime;
