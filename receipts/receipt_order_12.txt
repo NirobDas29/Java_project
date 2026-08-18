@@ -1,0 +1,17 @@
+========== PAYMENT RECEIPT ==========
+Order ID       : 12
+Customer       : arafat
+Movie          : Spider-Man: Brand New Day
+Hall           : Hall 1 - Blockbuster
+Date / Time    : 18-08-2026  06:00 PM
+--------------------------------------
+Seat A1 (Regular)   Rs.600.0
+--------------------------------------
+Total Amount   : Rs.600.0
+Payment Method : Nagad
+Mobile Number  : 01823758321
+Transaction ID : NGD55619069
+Payment Status : Success
+Paid On        : 18-08-2026 16:21:26
+======================================
+        Thank you for booking!

@@ -1,0 +1,17 @@
+========== PAYMENT RECEIPT ==========
+Order ID       : 10
+Customer       : arafat
+Movie          : The Odyssey
+Hall           : Hall 3 - General
+Date / Time    : 18-08-2026  10:00 PM
+--------------------------------------
+Seat A1 (Regular)   Rs.400.0
+--------------------------------------
+Total Amount   : Rs.400.0
+Payment Method : bKash
+Mobile Number  : 01823758321
+Transaction ID : BKS74258910
+Payment Status : Success
+Paid On        : 18-08-2026 15:42:53
+======================================
+        Thank you for booking!
